@@ -49,11 +49,11 @@ do
                     latest_handshake=${BASH_REMATCH[1]}
                     time_now=$(date +%s)
                     time_delta=$(( time_now - latest_handshake ))
-                    echo "${interface} >> ${publickey}  stat $time_now , $latest_handshake ,  $time_delta"
+                    #echo "${interface} >> ${publickey}  stat $time_now , $latest_handshake ,  $time_delta"
 
                     if [ ${time_delta} -gt ${timeout} ]
                     then
-                        echo "${interface} ${publickey} refresh with ${endpoint} (time_delta=${time_delta})"
+                        #echo "${interface} ${publickey} refresh with ${endpoint} (time_delta=${time_delta})"
                         wg set "${interface}" peer "${publickey}" endpoint "${endpoint}"
                     fi
                 fi

@@ -9,6 +9,13 @@
 # https://stackoverflow.com/questions/19482123/extract-part-of-a-string-using-bash-cut-split
 
 
+## silent fail is wg is not found
+if ! wg > /dev/null 2>&1
+then
+  exit 0
+fi
+
+
 timeout=135
 
 

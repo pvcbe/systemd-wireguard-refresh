@@ -14,6 +14,10 @@ timeout=135
 
 for dev in /etc/systemd/network/*.netdev;
 do
+    if [ ! -f "${dev}" ]
+    then
+      continue
+    fi
     if grep -qiE "Kind\s+?=\s+?wireguard" "${dev}"
     then
         #echo "checking ${dev}"

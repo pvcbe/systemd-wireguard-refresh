@@ -14,7 +14,10 @@ see https://git.zx2c4.com/WireGuard/tree/contrib/examples/reresolve-dns/reresolv
 
 to install, as root execute the following:
 
-    curl -o /opt/reresolve-dns-systemd.sh https://raw.githubusercontent.com/pvcbe/systemd-wireguard-refresh/master/reresolve-dns-systemd.sh
-    chmod +x /opt/reresolve-dns-systemd.sh    
-    echo "$(crontab -l ; echo '* * * * *   /opt/reresolve-dns-systemd.sh')" | crontab - 
-    
+    curl -s https://raw.githubusercontent.com/pvcbe/systemd-wireguard-refresh/master/install.sh | bash
+
+to remove the script's and timers:
+
+    curl -s https://raw.githubusercontent.com/pvcbe/systemd-wireguard-refresh/master/remove.sh | bash
+
+

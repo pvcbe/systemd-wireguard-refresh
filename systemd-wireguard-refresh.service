@@ -1,0 +1,8 @@
+[Unit]
+Description=refreshes wireguard peer's ip's for dynamic peer's with dns names
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/reresolve-dns-systemd.sh
+

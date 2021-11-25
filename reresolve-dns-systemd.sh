@@ -8,6 +8,7 @@
 # https://git.zx2c4.com/WireGuard/tree/contrib/examples/reresolve-dns/reresolve-dns.sh
 # https://stackoverflow.com/questions/19482123/extract-part-of-a-string-using-bash-cut-split
 
+set -euo pipefail
 
 ## silent fail is wg is not found
 if ! wg > /dev/null 2>&1
@@ -16,7 +17,7 @@ then
 fi
 
 
-timeout=135
+timeout=${TIMEOUT:-135}
 
 
 for dev in /etc/systemd/network/*.netdev;
@@ -28,7 +29,7 @@ do
     if grep -qiE "Kind\s+?=\s+?wireguard" "${dev}"
     then
         #echo "checking ${dev}"
-        regex_interface="Name\s+?=\s+?(\w+)"
+        regex_interface="Name\s+?=\s+?(\S+)"
         regex_peer_block="\[WireGuardPeer\]"
         regex_endpoint="Endpoint\s+?=\s+?(.*)"
         regex_publickey="PublicKey\s+?=\s+?(.*)"
@@ -53,7 +54,7 @@ do
                 continue
             fi
 
-            if [[ -n "${interface}" && -n "${publickey}" && -n "${endpoint}" ]]
+            if [[ -n "${interface:-}" && -n "${publickey:-}" && -n "${endpoint:-}" ]]
             then
                 if [[ $(wg show "${interface}" latest-handshakes|grep "${publickey}") =~ ${regex_handshake} ]]
                 then
